@@ -245,6 +245,12 @@ Interrupt::CreateFile(char *filename)
     return kernel->CreateFile(filename);
 }
 
+void
+Interrupt::PrintInt(int number)
+{
+    
+}
+
 
 //----------------------------------------------------------------------
 // Interrupt::Schedule
