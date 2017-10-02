@@ -113,6 +113,15 @@ SynchConsoleOutput::PutChar(char ch)
 //----------------------------------------------------------------------
 
 void
+SynchConsoleOutput::PrintInt(int number)
+{
+    lock->Acquire();
+    consoleOutput->PrintInt(number);
+    waitFor->P();
+    lock->Release();
+}
+
+void
 SynchConsoleOutput::CallBack()
 {
     waitFor->V();

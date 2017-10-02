@@ -248,7 +248,7 @@ Interrupt::CreateFile(char *filename)
 void
 Interrupt::PrintInt(int number)
 {
-    
+    kernel->PrintInt(number);
 }
 
 
