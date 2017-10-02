@@ -79,6 +79,7 @@ class ConsoleOutput : public CallBackObj {
     void CallBack();		// Invoked when next character can be put
 				// out to the display.
 
+    void PrintInt(int number);
   private:
     int writeFileNo;			// UNIX file emulating the display
     CallBackObj *callWhenDone;		// Interrupt handler to call when 
