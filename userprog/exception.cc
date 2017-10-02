@@ -123,7 +123,6 @@ ExceptionHandler(ExceptionType which)
 			val = kernel->machine->ReadRegister(4);
 			cout << "Val = " << val << "\n";
 			SysPrintInt(val);
-			kernel->machine->WriteRegister(2,(int)status);
 			{
 			/* set previous programm counter (debugging only)*/
 			kernel->machine->WriteRegister(PrevPCReg, kernel->machine->ReadRegister(PCReg));
@@ -134,6 +133,8 @@ ExceptionHandler(ExceptionType which)
 		   	/* set next programm counter for brach execution */
 		   	kernel->machine->WriteRegister(NextPCReg, kernel->machine->ReadRegister(PCReg)+4);
 			}
+			return;
+			ASSERTNOTREACHED();
 			break;
       	default:
 			cerr << "Unexpected system call " << type << "\n";
