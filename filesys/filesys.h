@@ -56,7 +56,11 @@ class FileSystem {
 	  int fileDescriptor = OpenForReadWrite(name, FALSE);
 
 	  if (fileDescriptor == -1) return NULL;
-	  return new OpenFile(fileDescriptor);
+	  
+	  OpenFile* file = new OpenFile(fileDescriptor);
+	  fileDescriptorTable[fileDescriptor];
+	  return file;	
+	  //return new OpenFile(fileDescriptor);
       }
 
     bool Remove(char *name) { return Unlink(name) == 0; }

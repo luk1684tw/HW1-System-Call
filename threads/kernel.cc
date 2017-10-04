@@ -313,3 +313,9 @@ void Kernel::PrintInt(int number)
     synchConsoleOut->PrintInt(number);
 }
 
+OpenFileId Kernel::OpenFile(char *filename)
+{
+    int ID = (int)fileSystem->Open(filename);
+    if(ID!=0) return ID;
+    else return -1;
+}
