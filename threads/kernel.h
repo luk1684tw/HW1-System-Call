@@ -25,7 +25,7 @@ class SynchConsoleInput;
 class SynchConsoleOutput;
 class SynchDisk;
 
-
+typedef int OpenFileId;	
 
 class Kernel {
   public:
@@ -47,6 +47,7 @@ class Kernel {
 	int CreateFile(char* filename); // fileSystem call
 
     void PrintInt(int number);
+    OpenFileId OpenFile(char *filename);
 
 // These are public for notational convenience; really, 
 // they're global variables used everywhere.

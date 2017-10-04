@@ -251,7 +251,11 @@ Interrupt::PrintInt(int number)
     kernel->PrintInt(number);
 }
 
-
+OpenFileId 
+Interrupt::OpenFile(char *filename)
+{
+    return kernel->OpenFile(filename);
+}
 //----------------------------------------------------------------------
 // Interrupt::Schedule
 // 	Arrange for the CPU to be interrupted when simulated time

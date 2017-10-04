@@ -39,4 +39,9 @@ void SysPrintInt(int number)
 	kernel->interrupt->PrintInt(number);
 }
 
+OpenFileId SysOpen(char *filename)
+{
+	kernel->interrupt->OpenFile(filename);
+}
+
 #endif /* ! __USERPROG_KSYSCALL_H__ */
