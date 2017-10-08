@@ -149,7 +149,16 @@ ExceptionHandler(ExceptionType which)
 			kernel->machine->WriteRegister(NextPCReg, kernel->machine->ReadRegister(PCReg)+4);
 			return;
 			ASSERTNOTREACHED();
-            break;
+			break;
+		case SC_Read:
+			cout << "Not Done\n";
+			break;
+		case SC_Write:
+			cout << "Not Done\n";
+			break;
+		case SC_Close:
+			cout << "Not Done\n";
+			break;
       	default:
 			cerr << "Unexpected system call " << type << "\n";
 			break;
