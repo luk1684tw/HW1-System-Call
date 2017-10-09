@@ -319,3 +319,18 @@ OpenFileId Kernel::OpenFile(char *filename)
     if(ID!=0) return ID;
     else return -1;
 }
+
+int Kernel::Read(char *buffer, int size, OpenFileId id)
+{
+    return fileSystem->Read(buffer,size,id);
+}
+
+int Kernel::Write(char *buffer, int size, OpenFileId id)
+{
+    return fileSystem->Write(buffer,size,id);
+}
+
+int Kernel::Close(OpenFileId id)
+{
+    return fileSystem->Close(id);
+}

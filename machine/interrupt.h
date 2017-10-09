@@ -100,7 +100,9 @@ class Interrupt {
 
 	  int CreateFile(char *filename);
     OpenFileId OpenFile(char *filename);
- 
+    int Read(char *buffer, int size, OpenFileId id);
+    int Write(char *buffer, int size, OpenFileId id);
+    int Close(OpenFileId id);
     void YieldOnReturn();	// cause a context switch on return 
 				// from an interrupt handler
 

@@ -151,10 +151,15 @@ ExceptionHandler(ExceptionType which)
 			ASSERTNOTREACHED();
             break;
 		case SC_Read:
-			DEBUG(dbgAddr,"Read\n");
+			DEBUG(dbgAddr,"Read File\n");
 			val = kernel->machine->ReadRegister(4);
 			{
-
+				char *buffer = &(kernel->machine->mainMemory[val]);
+				// 5,6 ??
+				int size = kernel->machine->ReadRegister(5);
+				int id = kernel->machine->ReadRegister(6);
+				status = SysRead(buffer,size,id);
+				kernel->machine->WriteRegister(2, (int) status);
 			}
 			kernel->machine->WriteRegister(PrevPCReg, kernel->machine->ReadRegister(PCReg));
 			kernel->machine->WriteRegister(PCReg, kernel->machine->ReadRegister(PCReg) + 4);
@@ -163,11 +168,35 @@ ExceptionHandler(ExceptionType which)
 			ASSERTNOTREACHED();
             break;
 		case SC_Write:
-			cout << "Not Done\n";
-			break;
+			DEBUG(dbgAddr,"Write File\n");
+			val = kernel->machine->ReadRegister(4);
+			{
+				char *buffer = &(kernel->machine->mainMemory[val]);
+				// 5 6 ??
+				int size = kernel->machine->ReadRegister(5);
+				int id = kernel->machine->ReadRegister(6);
+				status = SysWrite(buffer,size,id);
+				kernel->machine->WriteRegister(2, (int) status);
+			}
+			kernel->machine->WriteRegister(PrevPCReg, kernel->machine->ReadRegister(PCReg));
+			kernel->machine->WriteRegister(PCReg, kernel->machine->ReadRegister(PCReg) + 4);
+			kernel->machine->WriteRegister(NextPCReg, kernel->machine->ReadRegister(PCReg)+4);
+			return;
+			ASSERTNOTREACHED();
+            break;
 		case SC_Close:
-			cout << "Not Done\n";
-			break;
+			DEBUG(dbgAddr,"Close File\n");
+			val = kernel->machine->ReadRegister(4);
+			{
+				status = SysClose(val);
+				kernel->machine->WriteRegister(2, (int) status);
+			}
+			kernel->machine->WriteRegister(PrevPCReg, kernel->machine->ReadRegister(PCReg));
+			kernel->machine->WriteRegister(PCReg, kernel->machine->ReadRegister(PCReg) + 4);
+			kernel->machine->WriteRegister(NextPCReg, kernel->machine->ReadRegister(PCReg)+4);
+			return;
+			ASSERTNOTREACHED();
+            break;
       	default:
 			cerr << "Unexpected system call " << type << "\n";
 			break;

@@ -40,6 +40,8 @@
 #ifdef FILESYS_STUB 		// Temporarily implement file system calls as 
 				// calls to UNIX, until the real file system
 				// implementation is available
+typedef int OpenFileId;				
+				
 class FileSystem {
   public:
     FileSystem() { for (int i = 0; i < 20; i++) fileDescriptorTable[i] = NULL; }
@@ -62,6 +64,52 @@ class FileSystem {
 	  return file;	
 	  //return new OpenFile(fileDescriptor);
       }
+
+	int Read(char *buffer, int size, OpenFileId id)
+	{
+		int check,i = 0;
+		for(i=0;i<20;i++){
+			if(fileDescriptorTable[i]!=NULL && (OpenFileId)fileDescriptorTable[i] == id){
+				check = 1;
+				break;
+			}	
+		}
+
+		if(check) return fileDescriptorTable[i]->Read(buffer,size); 
+		else return -1;
+	}
+
+	int Write(char *buffer, int size, OpenFileId id)
+	{
+		int check,i = 0;
+		for(i=0;i<20;i++){
+			if(fileDescriptorTable[i]!=NULL && (OpenFileId)fileDescriptorTable[i] == id){
+				check = 1;
+				break;
+			}	
+		}
+		
+		if(check) return fileDescriptorTable[i]->Write(buffer,size); 
+		else return -1;
+	}
+
+	int Close(OpenFileId id)
+	{
+		int check,i = 0;
+		for(i=0;i<20;i++){
+			if(fileDescriptorTable[i]!=NULL && (OpenFileId)fileDescriptorTable[i] == id){
+				check = 1;
+				break;
+			}	
+		}
+
+		if(check){
+			delete fileDescriptorTable[i];
+			fileDescriptorTable[i] = NULL;
+			return 1;
+		}
+		else return 0;
+	}   
 
     bool Remove(char *name) { return Unlink(name) == 0; }
 
