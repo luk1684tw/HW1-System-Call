@@ -175,7 +175,7 @@ ConsoleOutput::PutChar(char ch)
 void
 ConsoleOutput::PrintInt(int number)
 {
-    char ch[20] = {};
+    char ch[32] = {};
     char c = '\n';
     int size = sprintf(ch,"%d",number);
     ASSERT(putBusy == FALSE);

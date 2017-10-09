@@ -45,11 +45,11 @@ class FileSystem {
     FileSystem() { for (int i = 0; i < 20; i++) fileDescriptorTable[i] = NULL; }
 
     bool Create(char *name) {
-	int fileDescriptor = OpenForWrite(name);
+		int fileDescriptor = OpenForWrite(name);
 
-	if (fileDescriptor == -1) return FALSE;
-	Close(fileDescriptor); 
-	return TRUE; 
+		if (fileDescriptor == -1) return FALSE;
+		Close(fileDescriptor); 
+		return TRUE; 
 	}
 
     OpenFile* Open(char *name) {
@@ -58,7 +58,7 @@ class FileSystem {
 	  if (fileDescriptor == -1) return NULL;
 	  
 	  OpenFile* file = new OpenFile(fileDescriptor);
-	  fileDescriptorTable[fileDescriptor];
+	  fileDescriptorTable[fileDescriptor] = file;
 	  return file;	
 	  //return new OpenFile(fileDescriptor);
       }

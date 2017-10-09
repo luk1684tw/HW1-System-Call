@@ -162,6 +162,12 @@ ExceptionHandler(ExceptionType which)
 			return;
 			ASSERTNOTREACHED();
             break;
+		case SC_Write:
+			cout << "Not Done\n";
+			break;
+		case SC_Close:
+			cout << "Not Done\n";
+			break;
       	default:
 			cerr << "Unexpected system call " << type << "\n";
 			break;

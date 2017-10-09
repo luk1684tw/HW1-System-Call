@@ -51,15 +51,16 @@
  * from the system call entry point in exception.cc.
  */
 
+
+ 
+ void PrintInt(int number);
+
 /* Stop Nachos, and print out performance stats */
 void Halt();			
  
 /*
  * Add the two operants and return the result
  */ 
-
-void PrintInt(int number);
-
 int Add(int op1, int op2);
 /*
  * Just for simply showing message, not a safe way for console IO
